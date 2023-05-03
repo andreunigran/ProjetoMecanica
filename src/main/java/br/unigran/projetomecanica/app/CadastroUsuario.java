@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package br.unigran.projetomecanica.app;
 
 import br.unigran.projetomecanica.app.models.Usuario;
@@ -12,13 +9,16 @@ import br.unigran.projetomecanica.app.models.Usuario;
  */
 public class CadastroUsuario extends PadraoCadastro{
 
-    /**
-     * Creates new form CadastroUsuario
-     */
+    
+    Usuario usuario ;
+
     public CadastroUsuario() {
         initComponents();
     }
-
+    public CadastroUsuario(Object o) {
+        usuario=(Usuario) o;
+        initComponents();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -60,11 +60,13 @@ public class CadastroUsuario extends PadraoCadastro{
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField jtNome;
     // End of variables declaration//GEN-END:variables
-
     @Override
     public Object getObjeto() {
-        Usuario usuario = new Usuario();
+        if(usuario==null)
+           usuario = new Usuario();
+        
         usuario.setNome(jtNome.getText());
+        //....
         return usuario;
     }
 }

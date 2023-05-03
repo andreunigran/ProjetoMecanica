@@ -6,7 +6,6 @@ package br.unigran.projetomecanica.app;
 
 import br.unigran.projetomecanica.app.dao.DAO;
 import java.awt.BorderLayout;
-import javax.swing.JPanel;
 
 /**
  *
