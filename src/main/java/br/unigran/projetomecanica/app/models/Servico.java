@@ -13,13 +13,14 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import lombok.Data;
 
 /**
  *
  * @author andre
  */
 @Entity
-public class Servico implements Serializable {
+public @Data class Servico implements Serializable {
 
     @OneToMany(mappedBy = "servico")
     private List<ItemServico> itemServicos;
@@ -37,39 +38,5 @@ public class Servico implements Serializable {
     @ManyToOne
     private Funcionario mecanico;
     @ManyToOne
-    private Cliente cliente;
-    
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Servico)) {
-            return false;
-        }
-        Servico other = (Servico) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "br.unigran.projetomecanica.app.models.Servico[ id=" + id + " ]";
-    }
-    
+    private Cliente cliente; 
 }

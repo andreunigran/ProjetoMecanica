@@ -4,6 +4,7 @@
  */
 package br.unigran.projetomecanica.app;
 
+import br.unigran.projetomecanica.app.cadastros.CadastroUsuario;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -64,6 +65,11 @@ public class Principal extends javax.swing.JFrame {
 
         jButton2.setText("Sair");
         jButton2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton2);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);
@@ -118,6 +124,11 @@ public class Principal extends javax.swing.JFrame {
         
         new Cadastro(this, new CadastroUsuario()).setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        System.exit(EXIT_ON_CLOSE);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

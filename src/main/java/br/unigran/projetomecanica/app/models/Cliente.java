@@ -6,68 +6,32 @@ package br.unigran.projetomecanica.app.models;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.ColumnResult;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import lombok.Data;
 
 /**
  *
  * @author andre
  */
 @Entity
-public class Cliente implements Serializable {
-
-    @OneToMany(mappedBy = "cliente")
-    private List<Servico> servicos;
-
+public @Data class Cliente implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(length = 150)
     private String nome;
+    @Column(length = 150)
     private String email;
-    private String telefone;
-    public Integer getId() {
-        return id;
-    }
+    @OneToMany(mappedBy = "cliente")
+    private List<Contato> contatos;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public List<Servico> getServicos() {
-        return servicos;
-    }
-
-    public void setServicos(List<Servico> servicos) {
-        this.servicos = servicos;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-  
+    @OneToMany(mappedBy = "cliente")
+    private List<Servico> servicos;
 }

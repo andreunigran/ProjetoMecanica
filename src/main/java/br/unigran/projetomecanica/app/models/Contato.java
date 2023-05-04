@@ -5,13 +5,12 @@
 package br.unigran.projetomecanica.app.models;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import lombok.Data;
 
 /**
@@ -19,17 +18,16 @@ import lombok.Data;
  * @author andre
  */
 @Entity
-public @Data class Cargo implements Serializable {
-
-    @OneToMany(mappedBy = "cargo")
-    private List<Funcionario> funcionarios;
+public @Data class Contato implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    @Column(length = 50)
-    private String nome;
-    @Column(length = 150)
-    private String descricao; 
+    private Tipo tipo;
+    @Column(length = 100)
+    private String descricao;
+    @ManyToOne
+    private Cliente cliente;
+    
 }

@@ -5,18 +5,20 @@
 package br.unigran.projetomecanica.app.models;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import lombok.Data;
 
 /**
  *
  * @author andre
  */
 @Entity
-public class Usuario implements Serializable {
+public @Data class Usuario implements Serializable {
 
     @OneToOne(mappedBy = "usuario")
     private Funcionario funcionario;
@@ -25,8 +27,9 @@ public class Usuario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private String nome;
+    @Column(length = 15)
     private String login;
+    @Column(length = 15)
     private String senha;
     // getters e setters
     public Integer getId() {
@@ -45,13 +48,6 @@ public class Usuario implements Serializable {
         this.funcionario = funcionario;
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
 
     public String getLogin() {
         return login;

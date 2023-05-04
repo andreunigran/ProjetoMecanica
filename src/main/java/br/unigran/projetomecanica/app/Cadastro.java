@@ -4,6 +4,7 @@
  */
 package br.unigran.projetomecanica.app;
 
+import br.unigran.projetomecanica.app.padroes.InterfacePadraoCadastro;
 import br.unigran.projetomecanica.app.dao.DAO;
 import java.awt.BorderLayout;
 
@@ -16,8 +17,8 @@ public class Cadastro extends javax.swing.JDialog {
     /**
      * Creates new form Cadastro
      */
-    private PadraoCadastro painel;
-    public Cadastro(java.awt.Frame parent, PadraoCadastro p) {
+    private InterfacePadraoCadastro painel;
+    public Cadastro(java.awt.Frame parent, InterfacePadraoCadastro p) {
         super(parent, true);
         initComponents();
         painel = p;
@@ -37,8 +38,13 @@ public class Cadastro extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jpTitulo = new javax.swing.JPanel();
+        jlTitulo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jButton1.setText("Salvar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -54,12 +60,15 @@ public class Cadastro extends javax.swing.JDialog {
             }
         });
 
+        jButton3.setText("Ajuda");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(198, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -69,13 +78,25 @@ public class Cadastro extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton3))
         );
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_END);
+
+        jpTitulo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jpTitulo.setLayout(new java.awt.BorderLayout());
+
+        jlTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlTitulo.setText("jLabel1");
+        jpTitulo.add(jlTitulo, java.awt.BorderLayout.CENTER);
+
+        getContentPane().add(jpTitulo, java.awt.BorderLayout.PAGE_START);
 
         setSize(new java.awt.Dimension(410, 330));
         setLocationRelativeTo(null);
@@ -99,6 +120,9 @@ public class Cadastro extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jlTitulo;
+    private javax.swing.JPanel jpTitulo;
     // End of variables declaration//GEN-END:variables
 }

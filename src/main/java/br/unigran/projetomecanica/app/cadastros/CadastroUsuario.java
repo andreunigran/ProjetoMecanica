@@ -1,13 +1,14 @@
 
-package br.unigran.projetomecanica.app;
+package br.unigran.projetomecanica.app.cadastros;
 
+import br.unigran.projetomecanica.app.padroes.InterfacePadraoCadastro;
 import br.unigran.projetomecanica.app.models.Usuario;
 
 /**
  *
  * @author andre
  */
-public class CadastroUsuario extends PadraoCadastro{
+public class CadastroUsuario extends InterfacePadraoCadastro{
 
     
     Usuario usuario ;
@@ -30,8 +31,14 @@ public class CadastroUsuario extends PadraoCadastro{
 
         jLabel1 = new javax.swing.JLabel();
         jtNome = new javax.swing.JTextField();
+        jpSenha = new javax.swing.JPasswordField();
+        jLabel2 = new javax.swing.JLabel();
 
-        jLabel1.setText("Nome");
+        jLabel1.setText("Login");
+
+        jpSenha.setText("jPasswordField1");
+
+        jLabel2.setText("Login");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -40,9 +47,17 @@ public class CadastroUsuario extends PadraoCadastro{
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE))
-                .addGap(28, 28, 28))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jpSenha, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jtNome, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE))
+                        .addGap(28, 28, 28))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -51,13 +66,19 @@ public class CadastroUsuario extends PadraoCadastro{
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jpSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 19, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPasswordField jpSenha;
     private javax.swing.JTextField jtNome;
     // End of variables declaration//GEN-END:variables
     @Override
@@ -65,8 +86,8 @@ public class CadastroUsuario extends PadraoCadastro{
         if(usuario==null)
            usuario = new Usuario();
         
-        usuario.setNome(jtNome.getText());
-        //....
+        usuario.setLogin(jtNome.getText());
+        usuario.setSenha(jpSenha.getPassword().toString());
         return usuario;
     }
 }

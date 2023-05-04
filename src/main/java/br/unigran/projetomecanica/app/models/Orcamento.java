@@ -10,13 +10,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import lombok.Data;
 
 /**
  *
  * @author andre
  */
 @Entity
-public class Orcamento implements Serializable {
+public @Data class Orcamento implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -25,30 +26,5 @@ public class Orcamento implements Serializable {
     private Double precoTotal;
     @ManyToOne
     private Servico servico;
-    // getters e setters
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Double getPrecoTotal() {
-        return precoTotal;
-    }
-
-    public void setPrecoTotal(Double precoTotal) {
-        this.precoTotal = precoTotal;
-    }
-
-    public Servico getServico() {
-        return servico;
-    }
-
-    public void setServico(Servico servico) {
-        this.servico = servico;
-    }
-
-    
+    // getters e setters 
 }
