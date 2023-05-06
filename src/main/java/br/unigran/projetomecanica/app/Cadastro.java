@@ -4,8 +4,8 @@
  */
 package br.unigran.projetomecanica.app;
 
+import br.unigran.projetomecanica.app.casosdeuso.Repository;
 import br.unigran.projetomecanica.app.padroes.InterfacePadraoCadastro;
-import br.unigran.projetomecanica.app.dao.DAO;
 import java.awt.BorderLayout;
 
 /**
@@ -17,7 +17,7 @@ public class Cadastro extends javax.swing.JDialog {
     /**
      * Creates new form Cadastro
      */
-    private InterfacePadraoCadastro painel;
+    private final InterfacePadraoCadastro painel;
     public Cadastro(java.awt.Frame parent, InterfacePadraoCadastro p) {
         super(parent, true);
         initComponents();
@@ -109,8 +109,7 @@ public class Cadastro extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        DAO dao = new DAO();
-        dao.salvar(painel.getObjeto());
+        Repository.salvar(painel.getObjeto());
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

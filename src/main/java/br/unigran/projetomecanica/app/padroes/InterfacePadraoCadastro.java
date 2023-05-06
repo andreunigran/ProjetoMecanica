@@ -11,5 +11,9 @@ import javax.swing.JPanel;
  * @author andre
  */
 public abstract class InterfacePadraoCadastro extends JPanel{
+    protected Object objeto;
     public abstract Object getObjeto();   
+    public  void setObjeto(Object o){
+        objeto=o;
+    };   
 }

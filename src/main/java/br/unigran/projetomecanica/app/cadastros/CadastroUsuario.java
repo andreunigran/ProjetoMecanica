@@ -11,13 +11,8 @@ import br.unigran.projetomecanica.app.models.Usuario;
 public class CadastroUsuario extends InterfacePadraoCadastro{
 
     
-    Usuario usuario ;
 
     public CadastroUsuario() {
-        initComponents();
-    }
-    public CadastroUsuario(Object o) {
-        usuario=(Usuario) o;
         initComponents();
     }
     /**
@@ -83,6 +78,7 @@ public class CadastroUsuario extends InterfacePadraoCadastro{
     // End of variables declaration//GEN-END:variables
     @Override
     public Object getObjeto() {
+        Usuario usuario=(Usuario) objeto ;
         if(usuario==null)
            usuario = new Usuario();
         

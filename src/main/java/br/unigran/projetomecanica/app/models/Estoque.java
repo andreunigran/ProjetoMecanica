@@ -25,4 +25,7 @@ public @Data class Estoque implements Serializable {
     private String nome;
     private Integer quantidade;
     private Double precoUnitario;
+    
 }
+
+
