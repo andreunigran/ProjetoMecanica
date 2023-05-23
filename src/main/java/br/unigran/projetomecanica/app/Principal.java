@@ -8,6 +8,10 @@ import br.unigran.projetomecanica.app.cadastros.CadastroFuncionario;
 import br.unigran.projetomecanica.app.cadastros.CadastroUsuario;
 import br.unigran.projetomecanica.app.models.Funcionario;
 import br.unigran.projetomecanica.app.models.Usuario;
+import java.awt.event.ActionEvent;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import javax.swing.Timer;
 
 /**
  *
@@ -20,6 +24,7 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
+        atualizaHoras();
     }
 
     /**
@@ -38,7 +43,7 @@ public class Principal extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jlHora = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -85,7 +90,7 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel2.setText("Usuario");
 
-        jLabel3.setText("Hora");
+        jlHora.setText("Hora");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -94,7 +99,7 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 576, Short.MAX_VALUE)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jlHora, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -103,7 +108,7 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(0, 6, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel3)))
+                    .addComponent(jlHora)))
         );
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.PAGE_END);
@@ -161,14 +166,38 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
         new Listagem(this, true, new Usuario(),new CadastroUsuario()).setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
-
+    private Timer timer;
+    private Calendar calendar = Calendar.getInstance();
+    
+    private void atualizaHoras(){
+//        timer = new Timer(1000, (ActionEvent e) ->{
+//        calendar.setTimeInMillis(calendar.getTimeInMillis()+1000);        
+//           jlHora.setText(new SimpleDateFormat("hh:mm:ss").format(calendar.getTime()));
+//        });
+//        timer.start();
+        
+        Thread th = new Thread(new Runnable() { //cria uma thread
+        public void run() {
+            while(true) { //roda indefinidamente
+               calendar.setTimeInMillis(calendar.getTimeInMillis()+1000);        
+               jlHora.setText(new SimpleDateFormat("hh:mm:ss").format(calendar.getTime()));
+                try {
+                    Thread.sleep(1000); //espera 1 segundo para fazer a nova evolução
+                } catch(InterruptedException ex){
+                }
+            }
+        }
+    }); th.start();
+        
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -177,5 +206,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel jlHora;
     // End of variables declaration//GEN-END:variables
 }
