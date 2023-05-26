@@ -93,7 +93,7 @@ public class Cadastro extends javax.swing.JDialog {
         jpTitulo.setLayout(new java.awt.BorderLayout());
 
         jlTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jlTitulo.setText("jLabel1");
+        jlTitulo.setText("Cadastro");
         jpTitulo.add(jlTitulo, java.awt.BorderLayout.CENTER);
 
         getContentPane().add(jpTitulo, java.awt.BorderLayout.PAGE_START);
@@ -110,6 +110,7 @@ public class Cadastro extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         Repository.salvar(painel.getObjeto());
+        dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

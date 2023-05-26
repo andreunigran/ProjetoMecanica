@@ -51,4 +51,8 @@ public class Funcionario implements Serializable,PadraoListar {
     public Object[] getDados() {
         return new Object[]{getNome()};
     }
+       @Override
+    public String pesquisar(String txt) {
+        return "and upper(o.nome) like upper('"+txt+"')";
+    }
 }

@@ -4,10 +4,13 @@
  */
 package br.unigran.projetomecanica.app;
 
+import br.unigran.projetomecanica.app.cadastros.CadastroCliente;
 import br.unigran.projetomecanica.app.cadastros.CadastroFuncionario;
 import br.unigran.projetomecanica.app.cadastros.CadastroUsuario;
+import br.unigran.projetomecanica.app.models.Cliente;
 import br.unigran.projetomecanica.app.models.Funcionario;
 import br.unigran.projetomecanica.app.models.Usuario;
+import br.unigran.projetomecanica.app.util.Acesso;
 import java.awt.event.ActionEvent;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -25,6 +28,7 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
         atualizaHoras();
+        Acesso.temAcesso(this);
     }
 
     /**
@@ -148,7 +152,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
+        new Listagem(this, true, new Cliente(),new CadastroCliente()).setVisible(true);
     //    new Listagem(this, true, new Cliente(),null).setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 

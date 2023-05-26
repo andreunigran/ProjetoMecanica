@@ -33,6 +33,7 @@ public @Data class Usuario implements Serializable,PadraoListar {
     @Column(length = 15)
     private String senha;
 
+    
     @Override
     public String[] getTitulo() {
         return new String[]{"Login","Funcionario"};
@@ -44,5 +45,8 @@ public @Data class Usuario implements Serializable,PadraoListar {
             getFuncionario()!=null?
             getFuncionario().getNome():""};
     }
-    
+   @Override
+    public String pesquisar(String txt) {
+        return "";
+    }  
 }

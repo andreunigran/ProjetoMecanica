@@ -11,4 +11,5 @@ package br.unigran.projetomecanica.app.padroes;
 public interface PadraoListar {
     public String[]getTitulo();
     public Object[]getDados();
+    public String pesquisar(String txt);
 }

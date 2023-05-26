@@ -4,6 +4,7 @@
  */
 package br.unigran.projetomecanica.app.models;
 
+import br.unigran.projetomecanica.app.padroes.PadraoListar;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,7 +19,7 @@ import lombok.Data;
  * @author andre
  */
 @Entity
-public @Data class Contato implements Serializable {
+public @Data class Contato implements Serializable,PadraoListar {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -29,5 +30,19 @@ public @Data class Contato implements Serializable {
     private String descricao;
     @ManyToOne
     private Cliente cliente;
+
+    @Override
+    public String[] getTitulo() {
+        return new String[]{"Tipo","Descrição"};
+    }
+
+    @Override
+    public Object[] getDados() {
+        return new Object[]{getTipo(),getDescricao()};
+    }
+     @Override
+    public String pesquisar(String txt) {
+        return "";
+    }
     
 }

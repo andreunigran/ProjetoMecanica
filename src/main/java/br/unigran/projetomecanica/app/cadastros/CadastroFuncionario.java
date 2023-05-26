@@ -4,9 +4,12 @@
  */
 package br.unigran.projetomecanica.app.cadastros;
 
+import br.unigran.projetomecanica.app.casosdeuso.Repository;
 import br.unigran.projetomecanica.app.models.Cargo;
 import br.unigran.projetomecanica.app.models.Funcionario;
+import br.unigran.projetomecanica.app.models.Usuario;
 import br.unigran.projetomecanica.app.padroes.InterfacePadraoCadastro;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
@@ -19,7 +22,7 @@ public class CadastroFuncionario extends InterfacePadraoCadastro {
      */
     public CadastroFuncionario() {
         initComponents();
-       // jcCargo.setModel();
+        jcCargo.setModel(new DefaultComboBoxModel(Repository.listar(Cargo.class, " order by nome").toArray()));
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -38,6 +41,11 @@ public class CadastroFuncionario extends InterfacePadraoCadastro {
         jdDataNasc = new com.toedter.calendar.JDateChooser();
         jLabel4 = new javax.swing.JLabel();
         jcCargo = new javax.swing.JComboBox<>();
+        jSeparator1 = new javax.swing.JSeparator();
+        jtLogin = new javax.swing.JTextField();
+        jtSenha = new javax.swing.JPasswordField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         jLabel1.setText("Nome");
 
@@ -49,22 +57,37 @@ public class CadastroFuncionario extends InterfacePadraoCadastro {
 
         jcCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        jLabel5.setText("Nome");
+
+        jLabel6.setText("Senha");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jtNome)
+                    .addComponent(jtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(jtNomeMae, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
+                    .addComponent(jtNomeMae)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
                     .addComponent(jdDataNasc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jcCargo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jtSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
+                        .addComponent(jtLogin))
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -85,6 +108,17 @@ public class CadastroFuncionario extends InterfacePadraoCadastro {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jcCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 14, Short.MAX_VALUE))
+            .addComponent(jSeparator1)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6)
+                .addGap(4, 4, 4)
+                .addComponent(jtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -94,12 +128,25 @@ public class CadastroFuncionario extends InterfacePadraoCadastro {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JComboBox<String> jcCargo;
     private com.toedter.calendar.JDateChooser jdDataNasc;
+    private javax.swing.JTextField jtLogin;
     private javax.swing.JTextField jtNome;
     private javax.swing.JTextField jtNomeMae;
+    private javax.swing.JPasswordField jtSenha;
     // End of variables declaration//GEN-END:variables
-
+    @Override
+    public  void setObjeto(Object o){
+        objeto=o;
+        Funcionario f = (Funcionario) objeto;
+        jtNome.setText(f.getNome());
+        jtNomeMae.setText(f.getNomeMae());
+        jdDataNasc.setDate(f.getDataNascimento());
+        jcCargo.setSelectedItem(f.getCargo());
+    };  
     @Override
     public Object getObjeto() {
         Funcionario f = (Funcionario) objeto;
@@ -107,8 +154,13 @@ public class CadastroFuncionario extends InterfacePadraoCadastro {
             f= new Funcionario();
         f.setCargo((Cargo) jcCargo.getSelectedItem());
         f.setNome(jtNome.getText());
+        f.setNomeMae(jtNomeMae.getText());
         f.setDataNascimento(jdDataNasc.getDate());
-        
+        Usuario u = new Usuario();
+        u.setFuncionario(f);
+        u.setLogin(jtLogin.getText());
+        u.setSenha(new String(jtSenha.getPassword()));
+        f.setUsuario(u);
         return f;
     }    
 }

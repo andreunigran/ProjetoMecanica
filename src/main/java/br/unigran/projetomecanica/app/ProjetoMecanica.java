@@ -1,5 +1,9 @@
 package br.unigran.projetomecanica.app;
 
+import br.unigran.projetomecanica.app.casosdeuso.Repository;
+import br.unigran.projetomecanica.app.models.Cliente;
+import br.unigran.projetomecanica.app.models.Usuario;
+import br.unigran.projetomecanica.app.splashscreen.SplashScreen;
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.FlatPropertiesLaf;
@@ -23,9 +27,11 @@ public class ProjetoMecanica {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-            Principal p =new Principal();
-            p.setExtendedState(JFrame.MAXIMIZED_BOTH);
-            p.setVisible(true);
+        //    new SplashScreen(null, true).setVisible(true);
+         //   Login p =new Login();
+         //   p.setVisible(true);
+         // new Principal().setVisible(true);
+         System.out.println(Repository.listaComParametros(Cliente.class, ""));
             }
         });
 

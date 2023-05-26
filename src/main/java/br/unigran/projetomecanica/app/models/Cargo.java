@@ -44,4 +44,9 @@ public @Data class Cargo implements Serializable ,PadraoListar{
     public Object[] getDados() {
         return new Object[]{getNome(),getDescricao()};
     }
+
+    @Override
+    public String pesquisar(String txt) {
+        return "and upper(o.nome) like upper('"+txt+"')";
+    }
 }
