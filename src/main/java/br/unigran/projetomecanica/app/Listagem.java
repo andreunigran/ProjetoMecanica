@@ -3,6 +3,7 @@ package br.unigran.projetomecanica.app;
 import br.unigran.projetomecanica.app.casosdeuso.Repository;
 import br.unigran.projetomecanica.app.padroes.InterfacePadraoCadastro;
 import br.unigran.projetomecanica.app.padroes.PadraoListar;
+import br.unigran.projetomecanica.app.util.Util;
 import java.awt.Frame;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -20,15 +21,9 @@ public final class Listagem extends javax.swing.JDialog {
         atualiza();
         }
     public void atualiza(){
-        dados=Repository.Listar(padrao.getClass(), "");
-        String columnNames[] = padrao.getTitulo();
-        Object[][] data = new Object[dados.size()][columnNames.length];
-        for(int i=0;i<dados.size();i++){
-            data[i]=padrao.getDados();
-        }
-        DefaultTableModel dataModel = 
-                new DefaultTableModel(data, columnNames);
-        jTable1.setModel(dataModel);
+        dados=Repository.listar(padrao.getClass(), padrao.pesquisar(jTextField1.getText()));
+        jTable1.setModel(Util.atualizaTabela(dados, padrao));
+        
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -38,11 +33,11 @@ public final class Listagem extends javax.swing.JDialog {
         jPanel4 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jbNovo = new javax.swing.JButton();
+        jbEditar = new javax.swing.JButton();
+        jbRemover = new javax.swing.JButton();
+        jbImprimir = new javax.swing.JButton();
+        jbSair = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
@@ -81,49 +76,49 @@ public final class Listagem extends javax.swing.JDialog {
 
         jPanel6.setLayout(new java.awt.GridLayout(1, 0));
 
-        jButton1.setText("Novo");
-        jButton1.setMaximumSize(new java.awt.Dimension(100, 50));
-        jButton1.setMinimumSize(new java.awt.Dimension(100, 50));
-        jButton1.setPreferredSize(new java.awt.Dimension(100, 50));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jbNovo.setText("Novo");
+        jbNovo.setMaximumSize(new java.awt.Dimension(100, 50));
+        jbNovo.setMinimumSize(new java.awt.Dimension(100, 50));
+        jbNovo.setPreferredSize(new java.awt.Dimension(100, 50));
+        jbNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jbNovoActionPerformed(evt);
             }
         });
-        jPanel6.add(jButton1);
+        jPanel6.add(jbNovo);
 
-        jButton6.setText("Editar");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        jbEditar.setText("Editar");
+        jbEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                jbEditarActionPerformed(evt);
             }
         });
-        jPanel6.add(jButton6);
+        jPanel6.add(jbEditar);
 
-        jButton2.setText("Remover");
-        jButton2.setMinimumSize(new java.awt.Dimension(100, 50));
-        jButton2.setPreferredSize(new java.awt.Dimension(100, 50));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jbRemover.setText("Remover");
+        jbRemover.setMinimumSize(new java.awt.Dimension(100, 50));
+        jbRemover.setPreferredSize(new java.awt.Dimension(100, 50));
+        jbRemover.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jbRemoverActionPerformed(evt);
             }
         });
-        jPanel6.add(jButton2);
+        jPanel6.add(jbRemover);
 
-        jButton3.setText("Imprimir");
-        jButton3.setMinimumSize(new java.awt.Dimension(100, 50));
-        jButton3.setPreferredSize(new java.awt.Dimension(100, 50));
-        jPanel6.add(jButton3);
+        jbImprimir.setText("Imprimir");
+        jbImprimir.setMinimumSize(new java.awt.Dimension(100, 50));
+        jbImprimir.setPreferredSize(new java.awt.Dimension(100, 50));
+        jPanel6.add(jbImprimir);
 
-        jButton4.setText("Sair");
-        jButton4.setMinimumSize(new java.awt.Dimension(100, 50));
-        jButton4.setPreferredSize(new java.awt.Dimension(100, 50));
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jbSair.setText("Sair");
+        jbSair.setMinimumSize(new java.awt.Dimension(100, 50));
+        jbSair.setPreferredSize(new java.awt.Dimension(100, 50));
+        jbSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jbSairActionPerformed(evt);
             }
         });
-        jPanel6.add(jButton4);
+        jPanel6.add(jbSair);
 
         jPanel2.add(jPanel6);
 
@@ -131,6 +126,11 @@ public final class Listagem extends javax.swing.JDialog {
         jPanel5.add(jLabel2);
 
         jTextField1.setColumns(30);
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField1KeyPressed(evt);
+            }
+        });
         jPanel5.add(jTextField1);
 
         jButton5.setText("Buscar");
@@ -171,13 +171,13 @@ public final class Listagem extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jbNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNovoActionPerformed
         // TODO add your handling code here:
         new Cadastro((Frame) this.getParent(), cadastro).setVisible(true);
         atualiza();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jbNovoActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jbRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbRemoverActionPerformed
         // TODO add your handling code here:
         if(jTable1.getSelectedRow()>0){
             Repository.remover(dados.get(jTable1.getSelectedRow()));
@@ -185,19 +185,19 @@ public final class Listagem extends javax.swing.JDialog {
         }else{
             JOptionPane.showMessageDialog(rootPane, "Selecione um item");
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jbRemoverActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jbSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSairActionPerformed
         // TODO add your handling code here:
         dispose();
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jbSairActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         atualiza();
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void jbEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEditarActionPerformed
         // TODO add your handling code here:
         if(jTable1.getSelectedRow()>0){
             new Cadastro((Frame) this.getParent(), (InterfacePadraoCadastro) dados.get(jTable1.getSelectedRow())).setVisible(true);
@@ -205,15 +205,15 @@ public final class Listagem extends javax.swing.JDialog {
         }else{
             JOptionPane.showMessageDialog(rootPane, "Selecione um item");
         }
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_jbEditarActionPerformed
+
+    private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
+        // TODO add your handling code here:
+        atualiza();
+    }//GEN-LAST:event_jTextField1KeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -225,5 +225,10 @@ public final class Listagem extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton jbEditar;
+    private javax.swing.JButton jbImprimir;
+    private javax.swing.JButton jbNovo;
+    private javax.swing.JButton jbRemover;
+    private javax.swing.JButton jbSair;
     // End of variables declaration//GEN-END:variables
 }
