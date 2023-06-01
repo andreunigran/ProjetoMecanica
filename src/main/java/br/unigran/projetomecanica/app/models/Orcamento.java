@@ -5,11 +5,13 @@
 package br.unigran.projetomecanica.app.models;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import lombok.Data;
 
 /**
@@ -19,6 +21,9 @@ import lombok.Data;
 @Entity
 public @Data class Orcamento implements Serializable {
 
+    @OneToMany(mappedBy = "orcamento")
+    private List<ItemOrcamento> itemOrcamentos;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,4 +32,5 @@ public @Data class Orcamento implements Serializable {
     @ManyToOne
     private Servico servico;
     // getters e setters 
+    
 }

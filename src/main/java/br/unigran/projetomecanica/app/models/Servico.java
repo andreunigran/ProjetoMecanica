@@ -23,6 +23,9 @@ import lombok.Data;
 public @Data class Servico implements Serializable {
 
     @OneToMany(mappedBy = "servico")
+    private List<ItemOrcamento> itemOrcamentos;
+
+    @OneToMany(mappedBy = "servico")
     private List<ItemServico> itemServicos;
 
     @OneToMany(mappedBy = "servico")

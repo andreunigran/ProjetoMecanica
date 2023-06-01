@@ -12,6 +12,7 @@
     <class>br.unigran.projetomecanica.app.models.Peca</class>
     <class>br.unigran.projetomecanica.app.models.Servico</class>
     <class>br.unigran.projetomecanica.app.models.Usuario</class>
+    <class>br.unigran.projetomecanica.app.models.ItemOrcamento</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/postgres"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>

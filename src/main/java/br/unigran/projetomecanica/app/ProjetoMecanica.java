@@ -27,11 +27,11 @@ public class ProjetoMecanica {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-        //    new SplashScreen(null, true).setVisible(true);
+          //  new SplashScreen(null, true).setVisible(true);
          //   Login p =new Login();
          //   p.setVisible(true);
-         // new Principal().setVisible(true);
-         System.out.println(Repository.listaComParametros(Cliente.class, ""));
+          new Principal().setVisible(true);
+         //System.out.println(Repository.listaComParametros(Cliente.class, ""));
             }
         });
 

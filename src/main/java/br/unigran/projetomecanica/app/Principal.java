@@ -7,14 +7,34 @@ package br.unigran.projetomecanica.app;
 import br.unigran.projetomecanica.app.cadastros.CadastroCliente;
 import br.unigran.projetomecanica.app.cadastros.CadastroFuncionario;
 import br.unigran.projetomecanica.app.cadastros.CadastroUsuario;
+import br.unigran.projetomecanica.app.casosdeuso.Repository;
+import br.unigran.projetomecanica.app.dao.BancoJDBC;
+import br.unigran.projetomecanica.app.dao.DAO;
 import br.unigran.projetomecanica.app.models.Cliente;
 import br.unigran.projetomecanica.app.models.Funcionario;
 import br.unigran.projetomecanica.app.models.Usuario;
 import br.unigran.projetomecanica.app.util.Acesso;
-import java.awt.event.ActionEvent;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Timer;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -54,6 +74,10 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Mecanica");
@@ -144,6 +168,34 @@ public class Principal extends javax.swing.JFrame {
         jMenu2.setText("Orçamento");
         jMenuBar1.add(jMenu2);
 
+        jMenu3.setText("Relatorios");
+
+        jMenuItem3.setText("C jdbc clientes");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem3);
+
+        jMenuItem4.setText("dados clientes");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem4);
+
+        jMenuItem5.setText("JDBC Clientes parametro");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem5);
+
+        jMenuBar1.add(jMenu3);
+
         setJMenuBar(jMenuBar1);
 
         setSize(new java.awt.Dimension(778, 538));
@@ -170,6 +222,65 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
         new Listagem(this, true, new Usuario(),new CadastroUsuario()).setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        try {
+            HashMap parameters = new HashMap();
+                // Ou seja, o arquivo .jasper
+            JasperReport jr = (JasperReport) JRLoader.loadObject(getClass().getResource("/relatorios/cliente.jasper"));
+
+            // JasperPrint representa o relatório gerado.
+            // É criado um JasperPrint a partir de um JasperReport, contendo o relatório preenchido.
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jr, parameters, BancoJDBC.getConn());
+     
+            JasperViewer viw = new JasperViewer(jasperPrint, false);
+                viw.setVisible(true);
+        } catch (JRException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        try {
+            // TODO add your handling code here:
+            HashMap parameters = new HashMap();
+            List dados = Repository.listar(Cliente.class, "");
+            
+            JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(dados);
+            parameters.put("INFO", "Hello");
+            
+            JasperReport jr = (JasperReport) JRLoader.loadObject(getClass().getResource("/relatorios/cliente.jasper"));
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jr, parameters, beanColDataSource);
+              JasperViewer viw = new JasperViewer(jasperPrint, false);
+                viw.setVisible(true);
+        } catch (JRException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        try {
+            // TODO add your handling code here:
+            HashMap parameters = new HashMap();
+            List dataList = new LinkedList();
+            
+            parameters.put("NomeParametro", "Olá mundo");
+            
+            JasperReport relatorio = JasperCompileManager.compileReport(getClass().getResource("/relatorios/cliente.jrxml").getFile());
+            // JRBeanCollectionDataSource dados = new JRBeanCollectionDataSource(lista, false);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(relatorio, parameters, BancoJDBC.getConn());
+      
+             JasperViewer viw = new JasperViewer(jasperPrint, false);
+                viw.setVisible(true);
+        } catch (JRException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
     private Timer timer;
     private Calendar calendar = Calendar.getInstance();
     
@@ -205,9 +316,13 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel jlHora;

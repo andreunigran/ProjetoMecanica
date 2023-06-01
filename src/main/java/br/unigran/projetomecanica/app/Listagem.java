@@ -108,6 +108,11 @@ public final class Listagem extends javax.swing.JDialog {
         jbImprimir.setText("Imprimir");
         jbImprimir.setMinimumSize(new java.awt.Dimension(100, 50));
         jbImprimir.setPreferredSize(new java.awt.Dimension(100, 50));
+        jbImprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbImprimirActionPerformed(evt);
+            }
+        });
         jPanel6.add(jbImprimir);
 
         jbSair.setText("Sair");
@@ -211,6 +216,11 @@ public final class Listagem extends javax.swing.JDialog {
         // TODO add your handling code here:
         atualiza();
     }//GEN-LAST:event_jTextField1KeyPressed
+
+    private void jbImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbImprimirActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jbImprimirActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton5;
